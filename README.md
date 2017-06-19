@@ -25,4 +25,4 @@ The bot will run the module the next time it is started.
 Use the `pull` command and see what happens! To add extra randomness, use `spin`.
 
 ## License
-This module is licensed under the GNU General Public License, version 3. Please see `LICENSE` to read it.
+This module is licensed under the MIT license. Please see `LICENSE` to read it.

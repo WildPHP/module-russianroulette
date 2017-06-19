@@ -1,7 +1,7 @@
 {
     "name": "wildphp/module-russianroulette",
     "description": "Russian Roulette game module for WildPHP",
-    "license": "GPL-3.0",
+    "license": "MIT",
     "authors": [
         {
             "name": "Yoshi2889",
