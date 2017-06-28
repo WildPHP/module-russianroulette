@@ -6,13 +6,6 @@
  * See the LICENSE file for more information.
  */
 
-/**
- * Created by PhpStorm.
- * User: rick2
- * Date: 24-4-2017
- * Time: 20:48
- */
-
 namespace WildPHP\Modules\RussianRoulette;
 
 use WildPHP\Core\Channels\Channel;
@@ -21,7 +14,6 @@ use WildPHP\Core\Commands\CommandHelp;
 use WildPHP\Core\ComponentContainer;
 use WildPHP\Core\Connection\Queue;
 use WildPHP\Core\ContainerTrait;
-use WildPHP\Core\Logger\Logger;
 use WildPHP\Core\Users\User;
 
 class RussianRoulette
@@ -53,6 +45,12 @@ class RussianRoulette
 		$this->resetGame();
 	}
 
+	/**
+	 * @param Channel $source
+	 * @param User $user
+	 * @param array $args
+	 * @param ComponentContainer $container
+	 */
 	public function spinGun(Channel $source, User $user, array $args, ComponentContainer $container)
 	{
 		$this->resetGame();
@@ -61,6 +59,12 @@ class RussianRoulette
 			'Chance per pull: ' . $chance . '%');
 	}
 
+	/**
+	 * @param Channel $source
+	 * @param User $user
+	 * @param array $args
+	 * @param ComponentContainer $container
+	 */
 	public function pullTrigger(Channel $source, User $user, array $args, ComponentContainer $container)
 	{
 		$this->current++;
