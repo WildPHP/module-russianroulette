@@ -14,9 +14,10 @@ use WildPHP\Core\Commands\CommandHelp;
 use WildPHP\Core\ComponentContainer;
 use WildPHP\Core\Connection\Queue;
 use WildPHP\Core\ContainerTrait;
+use WildPHP\Core\Modules\BaseModule;
 use WildPHP\Core\Users\User;
 
-class RussianRoulette
+class RussianRoulette extends BaseModule
 {
 	use ContainerTrait;
 
