@@ -86,4 +86,12 @@ class RussianRoulette extends BaseModule
 		$this->current = 0;
 		$this->bullet = mt_rand(1, $this->tries);
 	}
+
+	/**
+	 * @return string
+	 */
+	public static function getSupportedVersionConstraint(): string
+	{
+		return '^3.0.0';
+	}
 }
