@@ -38,7 +38,7 @@ class RussianRoulette extends BaseModule
 	public function __construct(ComponentContainer $container)
 	{
 		$commandHelp = new CommandHelp();
-		$commandHelp->addPage('See for yourself what happens.');
+		$commandHelp->append('See for yourself what happens.');
 		CommandHandler::fromContainer($container)->registerCommand('pull', [$this, 'pullTrigger'], $commandHelp, 0, 0);
 		CommandHandler::fromContainer($container)->registerCommand('spin', [$this, 'spinGun'], $commandHelp, 0, 0);
 		CommandHandler::fromContainer($container)->registerCommand('channelinfo', [$this, 'channelInfo'], $commandHelp, 0, 0);
