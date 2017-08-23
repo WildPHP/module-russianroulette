@@ -41,7 +41,6 @@ class RussianRoulette extends BaseModule
 		$commandHelp->append('See for yourself what happens.');
 		CommandHandler::fromContainer($container)->registerCommand('pull', [$this, 'pullTrigger'], $commandHelp, 0, 0);
 		CommandHandler::fromContainer($container)->registerCommand('spin', [$this, 'spinGun'], $commandHelp, 0, 0);
-		CommandHandler::fromContainer($container)->registerCommand('channelinfo', [$this, 'channelInfo'], $commandHelp, 0, 0);
 
 		$this->setContainer($container);
 		$this->resetGame();
@@ -59,44 +58,6 @@ class RussianRoulette extends BaseModule
 		$chance = 1/$this->tries*100;
 		Queue::fromContainer($container)->privmsg($source->getName(), 'The barrel has been spun and the bullet is now in a different location. ' .
 			'Chance per pull: ' . $chance . '%');
-	}
-
-	/**
-	 * @param Channel $source
-	 * @param User $user
-	 * @param array $args
-	 * @param ComponentContainer $container
-	 */
-	public function channelInfo(Channel $source, User $user, array $args, ComponentContainer $container)
-	{
-		$userCollection = $source->getUserCollection();
-		Queue::fromContainer($container)->privmsg($user->getNickname(), 'The current channel is ' . $source->getName());
-		Queue::fromContainer($container)->privmsg($user->getNickname(), 'It contains ' . count((array) $userCollection) . ' users.');
-
-		/** @var User $user */
-		$nicknames = [];
-		foreach ((array) $userCollection as $tuser)
-		{
-			$nicknames[] = $tuser->getNickname();
-		}
-		Queue::fromContainer($container)->privmsg($user->getNickname(), 'Namely: ' . implode(', ', $nicknames));
-		Queue::fromContainer($container)->privmsg($user->getNickname(), 'Topic: ' . $source->getTopic());
-		Queue::fromContainer($container)->privmsg($user->getNickname(), 'Created by: ' . $source->getCreatedBy() . ' @ ' . $source->getCreatedTime());
-
-		$modeMap = $source->getChannelModes();
-		Queue::fromContainer($container)->privmsg($user->getNickname(), 'The mode list contains the following:');
-
-		foreach ($modeMap->getPopulatedModeNames() as $mode)
-		{
-			$users = $modeMap->getUsersForMode($mode);
-
-			$msg = 'Mode ' . $mode . ' contains:';
-			/** @var User $user */
-			foreach ($users as $tuser)
-				$msg .= ' ' . $tuser->getNickname();
-
-			Queue::fromContainer($container)->privmsg($user->getNickname(), $msg);
-		}
 	}
 
 	/**
