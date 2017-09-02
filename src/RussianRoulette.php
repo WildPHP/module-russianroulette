@@ -9,8 +9,10 @@
 namespace WildPHP\Modules\RussianRoulette;
 
 use WildPHP\Core\Channels\Channel;
+use WildPHP\Core\Commands\Command;
 use WildPHP\Core\Commands\CommandHandler;
 use WildPHP\Core\Commands\CommandHelp;
+use WildPHP\Core\Commands\ParameterStrategy;
 use WildPHP\Core\ComponentContainer;
 use WildPHP\Core\Connection\Queue;
 use WildPHP\Core\ContainerTrait;
@@ -39,8 +41,18 @@ class RussianRoulette extends BaseModule
 	{
 		$commandHelp = new CommandHelp();
 		$commandHelp->append('See for yourself what happens.');
-		CommandHandler::fromContainer($container)->registerCommand('pull', [$this, 'pullTrigger'], $commandHelp, 0, 0);
-		CommandHandler::fromContainer($container)->registerCommand('spin', [$this, 'spinGun'], $commandHelp, 0, 0);
+
+		CommandHandler::fromContainer($container)->registerCommand('pull', new Command(
+			[$this, 'pullTrigger'],
+			new ParameterStrategy(0, 0),
+			$commandHelp)
+		);
+
+		CommandHandler::fromContainer($container)->registerCommand('spin', new Command(
+			[$this, 'spinGun'],
+			new ParameterStrategy(0, 0),
+			$commandHelp)
+		);
 
 		$this->setContainer($container);
 		$this->resetGame();
